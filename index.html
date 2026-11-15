@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vibewire Lab</title>
+<meta name="description" content="Vibewire Lab makes the Tale family: Talewell, Talekin and Talefire. Open-source, local-first apps for telling stories with your own AI models.">
+<meta property="og:title" content="Vibewire Lab">
+<meta property="og:description" content="Open-source, local-first apps for telling stories with your own AI models.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0F1423">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0F1423;
+    --bg-2: #151B2E;
+    --line: #262E47;
+    --text: #E8EBF4;
+    --muted: #9AA3BC;
+    --star: #FFDA6C;
+    --well: #00B4D8;
+    --kin: #BA8EFF;
+    --fire: #FFB027;
+    --radius: 18px;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 var(--sans);
+    padding: env(safe-area-inset-top, 0px) 20px env(safe-area-inset-bottom, 0px);
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+
+  /* Header */
+  header.top {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: 22px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; letter-spacing: .01em; }
+  .brand svg { width: 28px; height: 28px; }
+  .brand span { font-family: var(--serif); font-size: 1.2rem; }
+  nav a { color: var(--muted); text-decoration: none; margin-left: 20px; font-size: .95rem; }
+  nav a:hover { color: var(--text); }
+
+  /* Hero */
+  .hero { padding-block: 72px 56px; position: relative; }
+  .hero::before {
+    content: ""; position: absolute; inset: -40px -20vw auto auto; width: 520px; height: 520px;
+    background: radial-gradient(closest-side, rgba(255, 218, 108, .10), transparent);
+    pointer-events: none; z-index: -1;
+  }
+  .eyebrow { color: var(--star); font-size: .82rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 14px; }
+  h1 {
+    font-family: var(--serif); font-weight: 650; line-height: 1.08;
+    font-size: clamp(2.3rem, 6vw, 4rem); margin: 0 0 20px; max-width: 16ch;
+  }
+  .lede { color: var(--muted); font-size: clamp(1.05rem, 1.6vw, 1.2rem); max-width: 60ch; margin: 0; }
+  .pillars { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; padding: 0; list-style: none; }
+  .pillars li { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .9rem; color: var(--muted); }
+
+  /* Apps */
+  section.apps { padding-block: 24px 64px; }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: 1.6rem; margin: 0 0 24px; }
+  .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+  .card {
+    --accent: var(--star);
+    position: relative; display: flex; flex-direction: column;
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px; transition: border-color .2s, transform .2s;
+  }
+  .card:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); transform: translateY(-3px); }
+  .card.well { --accent: var(--well); }
+  .card.kin { --accent: var(--kin); }
+  .card.fire { --accent: var(--fire); }
+  .card .icon { width: 76px; height: 76px; border-radius: 18px; box-shadow: 0 0 0 1px var(--line); margin-bottom: 20px; }
+  .card h3 { font-family: var(--serif); font-weight: 650; font-size: 1.6rem; margin: 0; }
+  .card .tag { color: var(--accent); font-size: .95rem; margin: 4px 0 14px; font-style: italic; }
+  .card p.desc { color: var(--muted); margin: 0 0 18px; flex: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 22px; padding: 0; list-style: none; }
+  .chips li { font-size: .78rem; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--text); }
+  .gh {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    padding: 11px 16px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: .95rem;
+    background: var(--accent); color: #0F1423;
+  }
+  .gh:hover { filter: brightness(1.08); }
+  .gh:focus-visible, nav a:focus-visible, .brand:focus-visible { outline: 2px solid var(--star); outline-offset: 3px; }
+  .gh svg { width: 18px; height: 18px; }
+  /* whole card clickable */
+  .gh::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+
+  /* How they fit */
+  .fit { border-top: 1px solid var(--line); padding-block: 56px; display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .fit h2 { margin-bottom: 12px; }
+  .fit p { color: var(--muted); margin: 0; }
+  .flow { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .flow li { display: flex; gap: 12px; align-items: baseline; }
+  .flow b { font-family: var(--serif); font-weight: 650; min-width: 5.5em; }
+  .flow .w { color: var(--well); } .flow .k { color: var(--kin); } .flow .f { color: var(--fire); }
+
+  footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--muted); font-size: .9rem;
+    display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 520px) {
+    nav { display: none; }
+    .hero { padding-block: 40px 36px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="brand" href="./" aria-label="Vibewire Lab home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#151B2E"/><path fill="#FFDA6C" d="M32 8c2 13 11 22 24 24-13 2-22 11-24 24-2-13-11-22-24-24 13-2 22-11 24-24z"/></svg>
+      <span>Vibewire Lab</span>
+    </a>
+    <nav aria-label="Projects">
+      <a href="#talewell">Talewell</a>
+      <a href="#talekin">Talekin</a>
+      <a href="#talefire">Talefire</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">The Tale family</p>
+      <h1>Tell stories with AI that runs on your terms.</h1>
+      <p class="lede">Vibewire Lab builds open-source apps for roleplay and storytelling with your own language models. Run a model on your own machine or phone, or point the apps at any OpenAI-compatible API you choose.</p>
+      <ul class="pillars">
+        <li>Open source, Apache-2.0</li>
+        <li>Local-first, no telemetry</li>
+        <li>No account needed</li>
+      </ul>
+    </section>
+
+    <section class="apps" aria-labelledby="apps-h">
+      <h2 id="apps-h">Projects</h2>
+      <div class="grid">
+
+        <article class="card well" id="talewell">
+          <img class="icon" src="assets/talewell_flat_color.svg" alt="" width="76" height="76">
+          <h3>Talewell</h3>
+          <p class="tag">The well every story is drawn from.</p>
+          <p class="desc">A local AI engine for Android and Linux. It runs chat, text-diffusion and image models behind one OpenAI-compatible API, with an Automatic1111-compatible image API for tools like SillyTavern.</p>
+          <ul class="chips"><li>Android</li><li>Linux</li><li>OpenAI-compatible API</li></ul>
+          <a class="gh" href="https://github.com/Thunder21907/Talewell" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Talewell on GitHub
+          </a>
+        </article>
+
+        <article class="card kin" id="talekin">
+          <img class="icon" src="assets/talekin_flat_color.svg" alt="" width="76" height="76">
+          <h3>Talekin</h3>
+          <p class="tag">You and your characters.</p>
+          <p class="desc">One-on-one roleplay chat with your own LLM. Build characters in Character Studio, brainstorm with them while the card fills in, and keep every chat on your own device.</p>
+          <ul class="chips"><li>Linux</li><li>Windows</li><li>macOS</li><li>Android</li><li>Browser</li></ul>
+          <a class="gh" href="https://github.com/Thunder21907/Talekin" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Talekin on GitHub
+          </a>
+        </article>
+
+        <article class="card fire" id="talefire">
+          <img class="icon" src="assets/talefire_flat_color.svg" alt="" width="76" height="76">
+          <h3>Talefire</h3>
+          <p class="tag">Stories told together around the fire.</p>
+          <p class="desc">Group roleplay for two to six players with your own LLM as the narrator. Everyone acts at once each round, joining over the local network, Tailscale or a self-hosted relay.</p>
+          <ul class="chips"><li>Linux</li><li>Windows</li><li>macOS</li><li>Android</li><li>Browser</li></ul>
+          <a class="gh" href="https://github.com/Thunder21907/Talefire" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Talefire on GitHub
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="fit" aria-labelledby="fit-h">
+      <div>
+        <h2 id="fit-h">How they fit together</h2>
+        <p>Each app works on its own with any OpenAI-compatible endpoint, such as LM Studio or Ollama. Together they make a fully local setup: Talewell serves the model, and Talekin and Talefire tell the stories.</p>
+      </div>
+      <ul class="flow">
+        <li><b class="w">Talewell</b><span>runs the model on your phone or PC</span></li>
+        <li><b class="k">Talekin</b><span>for one-on-one stories with characters</span></li>
+        <li><b class="f">Talefire</b><span>for a group gathered around one narrator</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Vibewire Lab. All projects are open source under the Apache License 2.0.</span>
+    <a href="https://github.com/Thunder21907" rel="noopener">GitHub profile</a>
+  </footer>
+
+</div>
+</body>
+</html>
